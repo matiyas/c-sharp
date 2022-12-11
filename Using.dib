@@ -1,0 +1,25 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+using System.IO;
+
+// Type inside brackets must implement IDisposable (have a Dispose methos which is used to cleanup usually)
+using (StreamReader reader = File.OpenText("example.txt")) {
+  Console.WriteLine(reader.ReadToEnd());
+}
+
+// Or
+{
+  using var reader = File.OpenText("example.txt");
+  Console.WriteLine(reader.ReadToEnd());
+}
+
+
+/* Equalivent to:
+String reader = File.OpenText("example.txt")
+try     { Console.WriteLine(reader.ReadToEnd()); }
+finally { reader.Dispose(); }
+*/
