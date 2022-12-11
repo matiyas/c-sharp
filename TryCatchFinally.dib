@@ -13,7 +13,11 @@ void FetchPage () {
   
     Console.WriteLine(page);
   }
-  catch (WebException ex) {
+  catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout) {
+    Console.WriteLine("Nie odpowiada");
+  }
+  catch (WebException ex) when (ex.Status == WebExceptionStatus.NameResolutionFailure) {
+    Console.WriteLine(ex.Status);
     Console.WriteLine("Inner:");
     Console.WriteLine(ex.Message);
     Console.WriteLine(ex.StackTrace);
@@ -26,6 +30,9 @@ void FetchPage () {
 
     // Re-Throw exception. Include inner exception.
     throw new WebException("Wyjebało błąd. Zabij się!", ex);
+  }
+  catch (WebException) {
+    Console.WriteLine("Jakiś inny błąd");
   }
 }
 
