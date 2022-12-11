@@ -1,0 +1,20 @@
+#!csharp
+
+var a = "string";
+var b = "string";
+var l1 = new List<int> { 1, 2, 3 };
+var l2 = new List<int> { 1, 2, 3 };
+var l12 = l1;
+
+Console.WriteLine(object.ReferenceEquals(a, b));
+Console.WriteLine(object.Equals(a, b));
+
+Console.WriteLine(object.ReferenceEquals(l1, l2));
+Console.WriteLine(object.Equals(l1, l2));
+
+Console.WriteLine(object.ReferenceEquals(l1, l12));
+Console.WriteLine(object.Equals(l1, l12));
+Console.WriteLine(l1 == l12);
+
+Console.WriteLine(a.GetHashCode());
+Console.WriteLine(b.GetHashCode());

@@ -1,0 +1,17 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+// Parametr "out" pozwala na kowariację - konwersję delegatu o zwracanym bardziej dookreślonym na typie na typ mniej 
+// dookreślony
+delegate TResult Test<out TResult> ();
+
+Test<int[]> t1 = () => new[] { 1, 2, 3 };;
+Test<IEnumerable> t12 = t1;
+
+delegate TResult Test2<TResult> ();
+
+Test2<int[]> t2 = () => new[] { 1, 2, 3 };;
+// Test2<IEnumerable> t22 = t2; // error CS0029: Nie można niejawnie przekonwertować typu „Test2<int[]>” na „Test2<System.Collections.IEnumerable>”.

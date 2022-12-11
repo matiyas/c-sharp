@@ -1,0 +1,12 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+// Parametr "in" pozwala na kontrwariację - konwersję delegatu o parametrze o typie mniej dookreślonym na typ bardziej 
+// dookreślony
+delegate void Test<in T1> (T1 t);
+
+Test<IEnumerable> test1 = e => Console.WriteLine(e.GetType());
+Test<int[]> test2 = test1;

@@ -1,0 +1,49 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+public interface I1 {
+  void Foo ();
+}
+
+public interface I2 {
+  bool Foo ();
+}
+
+public interface I3 {
+  int Foo () {
+    Console.WriteLine("I3 dupa");
+    return 0;
+  }
+}
+
+public class Bar : I1, I2, I3 {
+  // Niejawna implementacja (sealed)
+  public virtual void Foo () => Console.WriteLine("I1 dupa");
+
+  // Jawna implementacja
+  bool I2.Foo () { 
+    Console.WriteLine("I2 dupa");
+    return true;
+  }
+}
+
+public class Baz : Bar {
+  public override void Foo () => Console.WriteLine("Baz dupa");
+}
+
+public class Baz2 : Bar {
+  public new void Foo () => Console.WriteLine("Baz2 dupa");
+}
+
+var bar = new Bar();
+var baz = new Baz();
+var baz2 = new Baz2();
+
+bar.Foo(); // lub ((I1)bar).Foo();
+((I2)bar).Foo();  // I2 dupa
+((I3)bar).Foo();  // I3 dupa
+((Bar)baz).Foo(); // Baz dupa
+((Bar)baz2).Foo(); // I1 dupa

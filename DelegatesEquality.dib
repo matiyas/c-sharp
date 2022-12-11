@@ -1,0 +1,20 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+delegate void D1 ();
+delegate void D2 ();
+
+void Print () => Console.WriteLine("hello");
+void Print2 () => Console.WriteLine("hello");
+
+D1 d1 = Print;
+D1 d11 = Print;
+D1 d12 = Print2;
+D2 d2 = Print;
+
+Console.WriteLine(object.Equals(d1, d2));  // False => delegates are different
+Console.WriteLine(object.Equals(d1, d12)); // False => delegates are different
+Console.WriteLine(object.Equals(d1, d11)); // True => delegates and methods are the same

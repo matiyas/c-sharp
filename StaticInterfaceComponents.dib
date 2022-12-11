@@ -1,0 +1,12 @@
+#!csharp
+
+interface I1 {
+  // Składowe interfejsów są (niejawnie) składowymi PUBLICZNYMI
+  static string Name = "dupa";
+  static int Age;
+}
+
+class C1 : I1 {}
+
+Console.WriteLine(I1.Name);
+Console.WriteLine(I1.Age);

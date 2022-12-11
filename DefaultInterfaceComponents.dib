@@ -1,0 +1,19 @@
+#!csharp
+
+public interface I1 {
+  // Domyślne pole interfejsu
+  string Name => "dupa";
+
+  // Domyślna metoda interfejsu
+  void Foo () => Console.WriteLine("I1 dupa");
+}
+
+public class C1 : I1 {
+  string I1.Name => "benek";
+}
+
+var c1 = new C1();
+
+// Domyślne i jawnie zaimplementowane składowe interfejsów muszą być wywoływane przez rzutowanie
+((I1)c1).Foo();
+Console.WriteLine(((I1)c1).Name);

@@ -1,0 +1,31 @@
+#!csharp
+
+public interface IMyEnumerator {
+  bool MoveNext ();
+  int Current { get; }
+  void Reset ();
+}
+
+public class BaseCountdown : IMyEnumerator {
+  protected int count = 10;
+  public bool MoveNext () => count-- > 0;
+  public int Current { get => count; }
+  public void Reset () => count = 10;
+}
+
+public class Countdown : BaseCountdown {
+  public bool MoveNext () => (count -= 2) > 2;
+}
+
+var countdown = new Countdown();
+
+Console.WriteLine(countdown.Current);
+countdown.MoveNext();
+
+Console.WriteLine(countdown.Current);
+countdown.MoveNext();
+
+Console.WriteLine(countdown.Current);
+countdown.MoveNext();
+
+Console.WriteLine(countdown.Current);

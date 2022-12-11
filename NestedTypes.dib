@@ -1,0 +1,16 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+class Car {
+  public enum Type { Hatchback, Sedan, Kombi, Cabrio, Coupe, Suv };
+
+  public Type CarType { get; set; }
+}
+
+var car = new Car() { CarType = Car.Type.Kombi };
+
+Console.WriteLine(car.CarType); // Kombi
+Console.WriteLine(Car.Type.Sedan); // Sedan

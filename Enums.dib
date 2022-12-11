@@ -1,0 +1,52 @@
+#!csharp
+
+// * Typ prosty
+// * Domyślnie int
+// * Dopuszczalne typy: byte, sbyte, short, ushort, int, uint, long lub ulong
+
+// ======================= FLAGS ============================
+[Flags] // Zmienia reprezentację ToString
+enum Positions { None = 0,  Top = 1, Right = 2, Down = 4, Left = 8 };
+enum SimplePositions { None = 0,  Top = 1, Right = 2, Down = 4, Left = 8, TopLeft = Top | Left };
+
+var p1 = Positions.Top;
+var p2 = Positions.Top | Positions.Right;
+var sp1 = SimplePositions.Top | SimplePositions.Right;
+
+Console.WriteLine(p1); // Top
+Console.WriteLine(p2); // Top, Right
+Console.WriteLine(sp1); // 3
+
+// ====================== ENUMS =============================
+enum Color { Red, Blue, Green, Yellow };
+
+var c1 = Color.Red;
+var c2 = c1;
+var c3 = Color.Blue & Color.Green;
+var c4 = Color.Blue | Color.Green;
+++c2;
+
+// 0 => casting is not needed
+Color c5 = 0; // Red
+
+// > 0 => casting is needed
+Color c6 = (Color)2; // Green
+
+Console.WriteLine(Size.XS == Size.L); // True
+Console.WriteLine((Size)Color.Green); // M
+Console.WriteLine(c1); // Red
+Console.WriteLine(c2); // Blue
+Console.WriteLine(c3); // Red
+Console.WriteLine(c4); // Yellow
+Console.WriteLine((int)c3); // 0  =>  0001 & 0010
+Console.WriteLine((int)c4); // 3  =>  0001 | 0010
+
+// ====================== DEFAULTS ===========================
+enum Size : byte {
+  XS = 3,
+  S, // = 4
+  M = 2,
+  L, // = 3
+  XL, // = 4
+  XXL // = 5
+};

@@ -1,0 +1,21 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+delegate int Transformer (int x);
+var values = new[] { 1, 2, 3, 4, 5 };
+int Square (int x) => x * x;
+
+List<int> MyTransformValues (int[] values, Transformer transformer) {
+  var list = new List<int>(values.Length);
+
+  for (var i = 0; i < values.Length; ++i) {
+    values[i] = transformer(values[i]);
+  }
+
+  return list;
+}
+
+Console.WriteLine(MyTransformValues(values, Square));

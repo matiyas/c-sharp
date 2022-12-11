@@ -1,0 +1,19 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+delegate int Transformer(int x);
+Transformer u = new Transformer(Square);
+Transformer v = new(Triple);
+Transformer t = new Transformer(u);
+
+Console.WriteLine(t(5));
+Console.WriteLine(u(5));
+Console.WriteLine(v(5));
+Console.WriteLine(t.Invoke(6));
+Console.WriteLine(t.GetType());
+
+int Square (int x) => x * x;
+int Triple (int x) => x * 3;

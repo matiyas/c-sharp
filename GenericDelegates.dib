@@ -1,0 +1,14 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+delegate TResult MyFunc <out TResult> ();
+delegate TResult MyFunc <T1,TResult> (T1 t1);
+
+MyFunc<int> mf = () => 90;
+MyFunc<int,double> mf2 = x => x * x + 0.1;
+
+Console.WriteLine(mf());
+Console.WriteLine(mf2(3));

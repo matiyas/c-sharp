@@ -1,0 +1,19 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+delegate void LinePrinter (string s);
+LinePrinter lp;
+
+void Print1 (string s) => Console.WriteLine($"{s} 1");
+void Print2 (string s) => Console.WriteLine($"{s} 2");
+void Print3 (string s) => Console.WriteLine($"{s} 3");
+
+lp += Print1;
+lp += Print2;
+lp += Print3;
+lp -= Print2;
+
+lp("dupa ");

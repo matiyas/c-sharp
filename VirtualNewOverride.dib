@@ -1,0 +1,20 @@
+#!csharp
+
+class A {
+  public virtual void Print() => Console.WriteLine("Hello");
+  public void Print2() => Console.WriteLine("Hello2");
+}
+
+class B : A {
+  public override void Print() => Console.WriteLine("World");
+  public void Print2() => Console.WriteLine("World2");
+  public void Print3() => Console.WriteLine("")
+}
+
+var a = new A();
+A b = new B();
+
+a.Print();
+b.Print();
+a.Print();
+b.Print();
