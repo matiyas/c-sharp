@@ -1,0 +1,40 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+class Broadcaster {
+  private event EventHandler _priceChanged;
+  private decimal _price;
+
+  public event EventHandler PriceChanged {
+    add {
+      Console.WriteLine("Dodano nowy event");
+      this._priceChanged += value;
+    }
+
+    remove {
+      Console.WriteLine("Usunięto event");
+      this._priceChanged -= value;
+    }
+  }
+
+  public decimal Price { 
+    get => this._price;
+    set {
+      if (value == this._price) return;
+
+      this._priceChanged?.Invoke(this, EventArgs.Empty);
+      this._price = value;
+    }
+  }
+}
+
+void OnPriceChanged (object o, EventArgs args) {
+  Console.WriteLine("Price has been changed");
+}
+
+var b = new Broadcaster();
+b.PriceChanged += OnPriceChanged;
+b.Price = 12;
