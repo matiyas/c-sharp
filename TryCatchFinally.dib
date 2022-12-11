@@ -1,0 +1,44 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+using System.Net;
+
+void FetchPage () {
+  try {
+    var webClient = new WebClient();
+    var page = webClient.DownloadString("http://www.invaliddomain.com");
+  
+    Console.WriteLine(page);
+  }
+  catch (WebException ex) {
+    Console.WriteLine("Inner:");
+    Console.WriteLine(ex.Message);
+    Console.WriteLine(ex.StackTrace);
+
+    // Re-Throw original exception.
+    // throw;
+
+    // Re-Throw exception. StackTrace IS CHANGED.
+    // throw ex;
+
+    // Re-Throw exception. Include inner exception.
+    throw new WebException("Wyjebało błąd. Zabij się!", ex);
+  }
+}
+
+try {
+  FetchPage();
+}
+catch (WebException ex) {
+  Console.WriteLine("\nOuter:");
+  Console.WriteLine(ex.Message);
+  Console.WriteLine(ex.StackTrace);
+  Console.WriteLine(ex.InnerException.Message);
+  Console.WriteLine(ex.InnerException.StackTrace);
+}
+finally {
+  Console.WriteLine("Wyczyść ten syf");
+}
