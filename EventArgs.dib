@@ -1,0 +1,61 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+using System.Globalization;
+
+class Broadcaster {
+  decimal price;
+
+  public Broadcaster (decimal price) => this.price = price;
+  
+  public event EventHandler<PriceChangedEventArgs> PriceChangedEvent;
+
+  public decimal Price {
+    get => this.price;
+    set {
+      if (value == this.price) return;
+
+      OnPriceChanged(new PriceChangedEventArgs(this.price, value));
+      this.price = value;
+    }
+  }
+
+  protected virtual void OnPriceChanged(PriceChangedEventArgs args) => PriceChangedEvent?.Invoke(this, args);
+}
+
+class PriceChangedEventArgs : EventArgs {
+  public readonly decimal OldPrice;
+  public readonly decimal NewPrice;
+
+  public PriceChangedEventArgs (decimal oldPrice, decimal newPrice) {
+    this.OldPrice = oldPrice;
+    this.NewPrice = newPrice;
+  }
+}
+
+class Subscriber {
+  Broadcaster broadcaster;
+
+  public Subscriber (Broadcaster broadcaster) {
+    this.broadcaster = broadcaster;
+    // this.broadcaster.PriceChangedEvent = this.OnPriceChanged;  // += OR -= are only accesible
+    // this.broadcaster.PriceChangedEvent(10, 20);  // += OR -= are only accesible
+    this.broadcaster.PriceChangedEvent += this.OnPriceChanged;
+  }
+
+  private void OnPriceChanged (object context, PriceChangedEventArgs args) {
+    Console.WriteLine($"The price has changed from {args.OldPrice:C}, to {args.NewPrice:C}");
+  }
+}
+
+CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
+
+var broadcaster = new Broadcaster(10);
+var subscriber = new Subscriber(broadcaster);
+
+broadcaster.Price = 15;
+
+Console.WriteLine(CultureInfo.CurrentCulture);
