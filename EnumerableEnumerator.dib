@@ -1,0 +1,39 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+// Enumerator must implement generic and non-generic Current properties
+class MyEnumerator : IEnumerator<int> {
+  private int[] _data = { 1, 2, 3, 4 };
+  private int _cursor = -1;
+
+  public MyEnumerator (int[] data) => this._data = data;
+
+  public bool MoveNext () => ++this._cursor < this._data.Length;
+  public void Reset () => this._cursor = -1;
+  public int Current { get => this._data[this._cursor]; }
+  
+  // Explicit elements can't be public
+  object IEnumerator.Current { get => this.Current; }
+  void IDisposable.Dispose () {}
+}
+
+// Enumerable must implement generic and non-generic GetEnumerator methods
+class MyEnumerable : IEnumerable<int> {
+  private MyEnumerator _myEnumerator;
+
+  public MyEnumerable (int[] data) => this._myEnumerator = new MyEnumerator(data);
+
+  public IEnumerator<int> GetEnumerator () => this._myEnumerator;
+
+  // Explicit elements can't be public
+  IEnumerator IEnumerable.GetEnumerator () => this.GetEnumerator();
+}
+
+var myEnum = new MyEnumerable(new[] { 1, 2, 3 });
+
+foreach (var x in myEnum) {
+  Console.WriteLine(x);
+}

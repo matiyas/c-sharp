@@ -17,7 +17,7 @@ using (StreamReader reader = File.OpenText("example.txt")) {
   Console.WriteLine(reader.ReadToEnd());
 }
 
-
+\
 /* Equalivent to:
 String reader = File.OpenText("example.txt")
 try     { Console.WriteLine(reader.ReadToEnd()); }
