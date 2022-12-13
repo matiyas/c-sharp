@@ -4,10 +4,21 @@
 
 #!csharp
 
-delegate int Transformer (int x);
+var dict = new Dictionary<string, int> {
+  { "ala", 1 },
+  { "ma", 2 },
+  { "kota", 3 }
+};
+var dict2 = new Dictionary<string, int> {
+  ["ala"] = 1,
+  ["ma"] = 2,
+  ["kota"] = 3
+};
 
-Transformer t1 = delegate (int x) { return x * 2; };
-Transformer t2 = delegate { return 3; };
+foreach (var x in dict) {
+  Console.WriteLine($"{x.Key} = {x.Value}");
+}
 
-Console.WriteLine(t1(3)); 
-Console.WriteLine(t2(5\)); 
+foreach (var x in dict2) {
+  Console.WriteLine($"{x.Key} = {x.Value}");
+}
