@@ -1,0 +1,59 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+int i = 5;
+// int j = null; ERROR: NOT NULLABLE
+int? j = null; // Nullable<int> j = new Nullable<int>();
+int? k = i; // implicit casting
+int l = (int)k; // explicit casting (if null occur, InvalidOperationException will be raised)
+
+/* Nullable struct implementation
+struct Nullable<T> where T : struct {
+  public T Value { get; }
+  public bool HasValue { get; }
+  public T GetValueOrDefault();
+  public T GetValueOrDefault(T defaultValue);
+}
+*/
+
+Console.WriteLine($"j == null => {j == null}"); // !j.HasValue
+Console.WriteLine($"j.HasValue => {j.HasValue}"); // j != null
+Console.WriteLine($"i = {i}");
+Console.WriteLine($"j = {j}");
+Console.WriteLine($"i.GetType() = {i.GetType()}");    // System.Int32
+// Console.WriteLine($"j.GetType() = {j.GetType()}"); // ERROR: j NOT SET TO INSTANCE OF AN OBJECT
+
+// OTHER OPERATORS
+Console.WriteLine($"i + j = {i + j}"); // null  =>  (i == null || j == null) ? null : (i + j)
+Console.WriteLine($"i - j = {i - j}"); // null
+Console.WriteLine($"i * j = {i * j}"); // null
+Console.WriteLine($"i / j = {i / j}"); // null
+Console.WriteLine($"i ^ j = {i ^ j}"); // null
+Console.WriteLine($"i & j = {i & j}"); // null
+Console.WriteLine($"i | j = {i | j}"); // null
+
+// EQUALITY OPERATORS
+Console.WriteLine($"i > j = {i > j}"); // False  =>  (i == null || j == null) ? false : (i > j)
+Console.WriteLine($"i < j = {i < j}"); // False
+Console.WriteLine($"i == j = {i == j}"); // False
+
+// BOOLEAN OPERATORS
+bool? t = true;
+bool? f = false;
+bool? n = null;
+
+Console.WriteLine($"t && n = {t & n}"); // null
+Console.WriteLine($"t && n = {f & n}"); // False
+Console.WriteLine($"t && n = {t | n}"); // True
+Console.WriteLine($"t && n = {f | n}"); // Null
+
+
+// RETURN DEFAULT VALUE IF NULL
+int? x = null;
+int? y = 2;
+int? z = 3;
+Console.WriteLine($"x ?? y = {x ?? y}");  // y
+Console.WriteLine($"y ?? z = {y ?? z}");  // y
