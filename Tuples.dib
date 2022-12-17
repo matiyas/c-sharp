@@ -27,3 +27,6 @@ Console.WriteLine(tuple1.GetType()); // System.ValueTuple
 
 Console.WriteLine(Name);
 Console.WriteLine(Number);
+
+Console.WriteLine((1, 2) == (1, 2)); // True
+Console.WriteLine((1, 2) == (1, 3)); // False
