@@ -1,0 +1,28 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+var user1 = new {
+  FirstName = "Jan",
+  LastName = "Nowak",
+  Age = 21
+};
+
+var user2 = new {
+  FirstName = "Anna",
+  LastName = "Kowalska",
+};
+
+var user3 = new {
+  FirstName = "Jan",
+  LastName = "Nowak",
+  Age = 21
+};
+
+Console.WriteLine(user1.FirstName);
+Console.WriteLine(user1.GetType());
+Console.WriteLine(user2.GetType());
+Console.WriteLine(user1.GetType() == user2.GetType()); // False
+Console.WriteLine(user1.GetType() == user3.GetType()); // True
