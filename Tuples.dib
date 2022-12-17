@@ -1,0 +1,29 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+var tuple1 = ("ala", 1);
+(string, int) tuple2 = ("ma", 2);
+var namedTuple = (Word: "kota", Number: 3);
+var tuple3 = (1, 2, 3);
+static (string, int) GetTuple () => ("test", 0); // Metoda zwracająca krotkę
+
+// Dekonstrukcja krotek
+var (Name, Number) = tuple1;
+var (Name2, Number2) = namedTuple;
+(int n1, int n2, int n3) = tuple3;
+
+Console.WriteLine(tuple1.Item1);
+Console.WriteLine(tuple1.Item2);
+
+Console.WriteLine(namedTuple.Word);
+Console.WriteLine(namedTuple.Number);
+
+Console.WriteLine(tuple3.Item3);
+
+Console.WriteLine(tuple1.GetType()); // System.ValueTuple
+
+Console.WriteLine(Name);
+Console.WriteLine(Number);
